@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Profile {% endblock  %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<br/><h1> Profile Page </h1><br/>
+
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        {% if profile.profile_pic %}
+            <img src="{{ profile.profile_pic.url }}" class="img-fluid rounded-start">
+        {% else %}
+            <img src="{% static 'images/profile.jpg' %}" class="img-fluid rounded-start">
+        {% endif %}
+        
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">
+            {% if profile.user.first_name or profile.user.last_name %}
+            {{ profile.first_name }} {{ profile.last_name }}
+            {% else %}
+            {{ profile.user.username }}
+            {% endif %}
+        </h5>
+          <p class="card-text">{{ profile.bio }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endif %}
+
+
+{% endblock %}

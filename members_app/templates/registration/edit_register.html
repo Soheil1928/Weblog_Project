@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %} Edit Register User {% endblock %}
+
+{% block content %}
+
+<h1> Edit Register User </h1>
+<br/>
+{{ user_edit.username }}
+<div class='form-group'>
+    <form method='POST'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-dark">Update User</button> 
+    </form>
+</div>
+
+{% endblock %}

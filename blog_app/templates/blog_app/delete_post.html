@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %} Delete Post {% endblock  %}
+
+
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == post.author.id %}
+    <br/><h1> Delete Post </h1><br/>
+    <h3> Delete {{ post.title }} ?</h3>
+
+    <div class='col-9 offset-1'>
+        <form method='POST' enctype="multipart/form-data">
+            {% csrf_token %}
+            <strong> Are you sure?! </strong><br/><br/>
+            <button class="btn btn-danger"> Delete Post </button> 
+        </form>
+    </div>
+
+    {% else %}
+    <br/><h1> Sorry! This page does not exist... </h1><br/>
+    {% endif %}
+
+    
+{% else %}
+<br/><h1> Sorry! This page does not exist... </h1><br/>
+{% endif %}
+
+
+{% endblock %}

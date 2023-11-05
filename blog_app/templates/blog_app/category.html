@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %} Category {% endblock  %}
+
+
+{% block content %}
+
+{% if category_post %}
+<br/><h1> Category: {{ cat|title }} </h1><br/>
+
+<ul>
+{% for post in category_post %}
+
+    <li><a href='{% url "post_detail" post.pk %}' style="text-decoration: none;"> 
+        <strong>{{ post.title }}</strong> 
+        </a><br/>
+        [Category: {{ post.category }} / Author: {{ post.author }} / Date: {{ post.post_date }}]
+    
+    {% if user.is_authenticated %}
+        {% if user.id == post.author.id %}
+        <small>
+            <a href='#' style="text-decoration: none;"> Edit </a>|
+            <a href='#' style="text-decoration: none; color: red;"> Delete </a>
+        </small>
+        {% endif %}
+    {% endif %}<br/>
+    Snippet: {{ post.snippet }}<br/>
+    {{ post.body|slice:"200"|safe }}
+    </li>
+
+{% endfor %}
+</ul>   
+{% else %}
+<br/><h1> Sorry! This page does not exist... </h1><br/>
+{% endif %}
+
+
+{% endblock %}
